@@ -146,6 +146,28 @@ td.list-group-link {
 }
 
 /*****************************
+ * CV SKILLS styles
+ *****************************/
+
+div.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem 1rem;
+  width: 100%;
+  padding-left: 1.8rem;
+}
+
+div.skills-grid-item {
+  font-size: 0.8rem;
+}
+
+@media (max-width: 576px) {
+  div.skills-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/*****************************
  * CV TOC styles
  *****************************/
 

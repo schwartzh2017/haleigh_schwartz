@@ -2,11 +2,11 @@
 layout: about
 title: about
 permalink: /
-subtitle: ・Data Scientist | Biologist | Healthcare Analyst・
+subtitle: ・Data Scientist | Consultant | Healthcare Analyst・
 
 profile:
   align: right
-  image: profile_picture.jpg
+  image: profile_picture.jpeg
   image_circular: false # crops the image to make it circular
   more_info: 
 
