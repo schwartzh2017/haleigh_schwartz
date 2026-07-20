@@ -45,10 +45,10 @@
 
     <span class="c1">#find accuracies using cross validated scores
 </span>    <span class="k">for</span> <span class="n">clf</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">([</span><span class="n">clf1</span><span class="p">,</span> <span class="n">clf2</span><span class="p">,</span> <span class="n">clf3</span><span class="p">,</span> <span class="n">clf4</span><span class="p">,</span> <span class="n">eclf</span><span class="p">],</span> <span class="p">[</span><span class="sh">'</span><span class="s">Random Forest</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Gradient Boost</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Bagging</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">SGD</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Ensemble</span><span class="sh">'</span><span class="p">]):</span>
-        <span class="n">scores</span> <span class="o">=</span> <span class="nf">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train_trans</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="sh">'</span><span class="s">neg_mean_squared_error</span><span class="sh">'</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> 
+        <span class="n">scores</span> <span class="o">=</span> <span class="nf">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train_trans</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="sh">'</span><span class="s">neg_mean_squared_error</span><span class="sh">'</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
         <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">MSE: %0.2f (+/- %0.2f) [%s]</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="p">.</span><span class="nf">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="p">.</span><span class="nf">std</span><span class="p">(),</span> <span class="n">label</span><span class="p">))</span> <span class="c1">#gradient boost was the best
 </span>
-    <span class="c1">##################### 
+    <span class="c1">#####################
 </span>
     <span class="c1"># 4. Hyperparameterize
 </span>
@@ -96,7 +96,7 @@
 </span>
     <span class="c1">#####################
 </span>
-    <span class="c1"># 6. Test 
+    <span class="c1"># 6. Test
 </span>
     <span class="c1">#set up pipeline with above parameters
 </span>    <span class="n">pipeline_test</span> <span class="o">=</span> <span class="nc">Pipeline</span><span class="p">([(</span><span class="sh">'</span><span class="s">transformer</span><span class="sh">'</span><span class="p">,</span> <span class="n">transformer</span><span class="p">),</span>
