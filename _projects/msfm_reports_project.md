@@ -13,7 +13,7 @@ In my role at [Main Street Family Medicine](https://www.mainstreetfamilymed.com/
 
 Watch the demonstration below for a look at how a user can navigate the application and gain insightful data from it. Please note that several reports are concealed from this demonstration for patient and business confidentiality reasons.
 
-When a user navigates to the web application, they are first prompted to enter the password. With the correct password, the app automatically navigates to the second page, titled "PPD Plot." This stands for "Patients per Provider per Day", which has helped us to keep track of how each provider's patient panels have grown so we can know when to on-board new providers and other staff. 
+When a user navigates to the web application, they are first prompted to enter the password. With the correct password, the app automatically navigates to the second page, titled "PPD Plot." This stands for "Patients per Provider per Day", which has helped us to keep track of how each provider's patient panels have grown so we can know when to on-board new providers and other staff.
 
 The second report title is hidden. The video shows the title of the third report ("Monthly Revenue Plots"), but the actual plots are not shown. This data has guided us through decisions concerning patient and company relationships, when to pause enrollment, how closed enrollment impacted our company, and when to open enrollment again.
 
@@ -48,7 +48,7 @@ See below for detailed code on the PPD plot.
             dplyr::filter(Provider == thisProvider,
                           between(Date, start_date, end_date),
                           Count_by_Provider != 0)
-        } 
+        }
         #select only full days
         else if (hours_worked == "Full days only") {
           PPD_subset <- PPD %>%
@@ -59,12 +59,12 @@ See below for detailed code on the PPD plot.
           if (thisProvider == "Alisha") {
             PPD_subset <- PPD_subset %>%
               dplyr::filter(`Alisha working?` == 1.0)
-          } 
+          }
           #select only baker's full days
           else if (thisProvider == "Baker") {
             PPD_subset <- PPD_subset %>%
               dplyr::filter(`Baker Working?` == 1.0)
-          } 
+          }
           #select only lindsey's full days
           else if (thisProvider == "Lindsey") {
             PPD_subset <- PPD_subset %>%
@@ -91,12 +91,12 @@ See below for detailed code on the PPD plot.
           if (thisProvider == "Alisha") {
             PPD_subset <- PPD_subset %>%
               dplyr::filter(`Alisha working?` != 1.0)
-          } 
+          }
           #DO NOT select baker's full days
           else if (thisProvider == "Baker") {
             PPD_subset <- PPD_subset %>%
               dplyr::filter(`Baker Working?` != 1.0)
-          } 
+          }
           #DO NOT select lindsey's full days
           else if (thisProvider == "Lindsey") {
             PPD_subset <- PPD_subset %>%
@@ -113,7 +113,7 @@ See below for detailed code on the PPD plot.
               dplyr::filter(`Corrie Working?` != 1.0)
           }
         }
-        
+
 
         #make subsets per user input
         if (thisProvider == "Alisha") {
@@ -124,7 +124,7 @@ See below for detailed code on the PPD plot.
           PPD1 <- PPD_subset %>%
             dplyr::select("Baker Working?", "Date", "Count_by_Provider", "Observation") %>%
             rename(Provider_Working = `Baker Working?`)
-        } 
+        }
         else if (thisProvider == "Lindsey") {
           PPD1 <- PPD_subset %>%
             dplyr::select("Lindsey Working?", "Date", "Count_by_Provider", "Observation") %>%
@@ -150,21 +150,21 @@ See below for detailed code on the PPD plot.
             dplyr::select("Other Provider Here?", "Date", "Count_by_Provider", "Observation") %>%
             rename(Provider_Working = `Other Provider Here?`)
         }
-        
+
         #make another subset for all the providers
         PPD_subset2 = PPD %>%
           filter(Count_by_Provider != 0) %>%
           filter(Provider != "Nurse") %>%
           filter(between(Date, start_date, end_date))
-        
+
         #make tibble for observation and actual date
         Observation_Day_tibble = tibble(
           Observation = seq(1,360,1),
           Day = unique(PPD$Date))
-        
+
         PPD_subset2 = PPD_subset2 %>%
           left_join(Observation_Day_tibble, by = "Observation")
-        
+
         #make the plot
         gg <- ggplot(data = PPD_subset, aes(x=Observation, y=Count_by_Provider)) +
           #PPD_subset2 to include even provider not selected on the side
@@ -172,30 +172,29 @@ See below for detailed code on the PPD plot.
           #for total provider, do not include nurse visits
           geom_smooth(data = PPD_subset2, aes(x=Observation, y=Total_Provider_Pts), se=FALSE, alpha=0.5,color="aquamarine4")+
           #for selected provider (ifelse depending on if nurse or other provider selected)
-          geom_smooth(method="glm", data=PPD1, aes(x=Observation, y=Count_by_Provider), color="black", method.args=list(family="poisson")) + 
+          geom_smooth(method="glm", data=PPD1, aes(x=Observation, y=Count_by_Provider), color="black", method.args=list(family="poisson")) +
           theme_classic()+
-          xlab("Date") + 
+          xlab("Date") +
           ylab("Number of Patients Seen \n(by Selected Provider)") +
           scale_x_continuous(breaks = seq(1,378,21), labels = c("Aug23","Sept23","Oct23","Nov23","Dec23","Jan24","Feb24","March24","April24","May24", "June24", "July24", "Aug24", "Sept24", "Oct24", "Nov24", "Dec24", "Jan25"))+#current max observations = 360 (1/05/25) (need to find how many unique days are in PPD from PPD.Rmd and then update both seq(1,x,21) and labels). Doing it every 21 since 21ish working days a month
-          ylim(0,17) + 
+          ylim(0,17) +
           theme(
             axis.title.x = element_blank()
           )
-        
+
           ggplotly(gg) %>%
             layout(title = list(text = paste0('<br>',
               paste("PPD for ", thisProvider, " between ", as.character(start_date), " & ", as.character(end_date), sep=""),
               '<br>',
               '<sup>',
-              '(black line = avg PPD for provider selected; green = total number patients seen per day)', 
+              '(black line = avg PPD for provider selected; green = total number patients seen per day)',
               '<br>',
               '<sup>'))
      })
 
 
     {% endhighlight %}
+
 </div>
 
 NOTE: Thank you to [Canva](https://www.canva.com/) for the stock report image used for this project.
-
-

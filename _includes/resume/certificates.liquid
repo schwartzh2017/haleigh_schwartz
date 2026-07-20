@@ -21,8 +21,8 @@
           <tr>
             <td></td>
             <td colspan="2" class="list-group-name">
-              {% if content.startDate %}Issued {{ content.startDate | date: "%b %Y" }}{% endif %}
-              {% if content.endDate %} &middot; Expires {{ content.endDate | date: "%b %Y" }}{% endif %}
+              {% if content.startDate %}Issued {{ content.startDate | date: '%b %Y' }}{% endif %}
+              {% if content.endDate %} &middot; Expires {{ content.endDate | date: '%b %Y' }}{% endif %}
             </td>
           </tr>
           {% if content.credentialId %}

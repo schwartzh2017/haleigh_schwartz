@@ -391,12 +391,36 @@
     {
       "name": "Technical Skills",
       "level": "",
-      "keywords": ["Python", "Claude Code", "SQL", "R", "Neural Networks", "Statistical Analysis", "Machine Learning", "Application development", "Data Visualization", "HTML/JS/CSS", "Data governance", "AI Agents"]
+      "keywords": [
+        "Python",
+        "Claude Code",
+        "SQL",
+        "R",
+        "Neural Networks",
+        "Statistical Analysis",
+        "Machine Learning",
+        "Application development",
+        "Data Visualization",
+        "HTML/JS/CSS",
+        "Data governance",
+        "AI Agents"
+      ]
     },
     {
       "name": "Professional Skills",
       "level": "",
-      "keywords": ["Consulting", "Enablement", "Leadership", "Problem solving", "Strategic AI adoption", "Deliver technical trainings", "Project and client management", "Effective communication", "Composure under pressure", "Navigating high-stakes conversations"]
+      "keywords": [
+        "Consulting",
+        "Enablement",
+        "Leadership",
+        "Problem solving",
+        "Strategic AI adoption",
+        "Deliver technical trainings",
+        "Project and client management",
+        "Effective communication",
+        "Composure under pressure",
+        "Navigating high-stakes conversations"
+      ]
     }
   ],
   "languages": [

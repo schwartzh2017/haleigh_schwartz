@@ -9,11 +9,11 @@ category: New Heights Clinic
 related_publications: false
 ---
 
-In my roles at [Main Street Family Medicine](https://www.mainstreetfamilymed.com/) and [New Heights Clinic](https://newheights.org/new-heights-clinic/), I compared patient demographics between the two clinics to better inform our leadership on how to care for both populations and grow each clinic separately. 
+In my roles at [Main Street Family Medicine](https://www.mainstreetfamilymed.com/) and [New Heights Clinic](https://newheights.org/new-heights-clinic/), I compared patient demographics between the two clinics to better inform our leadership on how to care for both populations and grow each clinic separately.
 
-The New Heights Clinic uses paper charts, and I was fortunate enough to have multiple volunteers help me manually collect information from a representative random sample of paper charts. Main Street Family Medicine uses an Electronic Medical Record (EMR) with very limited data capabilities, so I crafted work-arounds to generate as much data as I could despite the vast limitations. I started the presenation with simple Exploratory Data Analysis (EDA) of both clinics, then turned to a statistical comparision between the two. The results gave us insight on how the two clinics differ from each other so we could know what their unique needs are and how to grow as a result.  
+The New Heights Clinic uses paper charts, and I was fortunate enough to have multiple volunteers help me manually collect information from a representative random sample of paper charts. Main Street Family Medicine uses an Electronic Medical Record (EMR) with very limited data capabilities, so I crafted work-arounds to generate as much data as I could despite the vast limitations. I started the presenation with simple Exploratory Data Analysis (EDA) of both clinics, then turned to a statistical comparision between the two. The results gave us insight on how the two clinics differ from each other so we could know what their unique needs are and how to grow as a result.
 
-Below includes a few screenshots from the presentation and some relevant code. 
+Below includes a few screenshots from the presentation and some relevant code.
 
 <div class="row justify-content-sm-center">
   <div class="col-sm-5 mt-3 mt-md-0">
@@ -48,13 +48,13 @@ Below includes a few screenshots from the presentation and some relevant code.
         dplyr::select(ethnicity, gender, employment, faith, mo_income, household_size)
 
         #find pov level
-        ds_demo = ds_demo %>% 
+        ds_demo = ds_demo %>%
         rowwise() %>%
         mutate(poverty_level = predict_poverty_level(household_size, mo_income, pov)) %>%
         mutate(poverty_level = as.numeric(str_remove_all(poverty_level, "%")))
 
         #understand missing data
-        aggr(ds_demo, col=c('navyblue','red'), numbers=TRUE, sortVars=TRUE, labels=names(data), cex.axis=.7, gap=3, ylab=c("Histogram of missing data","Pattern")) 
+        aggr(ds_demo, col=c('navyblue','red'), numbers=TRUE, sortVars=TRUE, labels=names(data), cex.axis=.7, gap=3, ylab=c("Histogram of missing data","Pattern"))
 
         #use random forest method in mice to impute
         ds_demo_imp <- mice(ds_demo,m=5,maxit=50,method = "rf",seed=500)
@@ -89,8 +89,8 @@ Below includes a few screenshots from the presentation and some relevant code.
         #tile graph for ethnicity, gender, and pov level
 
         #make annotation for graph
-        ds_demo_imp_annotation = ds_demo_imp %>% 
-        group_by(ethnicity, gender) %>% 
+        ds_demo_imp_annotation = ds_demo_imp %>%
+        group_by(ethnicity, gender) %>%
         summarize(count=n()) %>%
         rename(x = gender) %>%
         rename(y= ethnicity) %>%
@@ -109,13 +109,14 @@ Below includes a few screenshots from the presentation and some relevant code.
         ) +
         xlab("Gender")+
         ylab("Ethnicity")+
-        scale_x_discrete(breaks = c("female", "male"), 
+        scale_x_discrete(breaks = c("female", "male"),
                         labels = c("Female", "Male")) +
         scale_y_discrete(breaks = c("african american", "asian/pacific islander", "caucasian", "hispanic", "other"),
                         labels = c("African American", "Asian or Pacific Islander", "Caucasian", "Hispanic", "Other")) +
         geom_text(data=ds_demo_imp_annotation, aes(x=x, y=y, label=label), color="beige", fontface="bold")
 
     {% endhighlight %}
+
 </div>
 
 NOTE: Thank you to [iStock by Getty Images](https://www.istockphoto.com/) for the stock demographic image used for this project.

@@ -28,7 +28,7 @@ See below for some basic statistic methods I used to detemine significance of qu
 
         ttest_combo=bind_rows(ttest_alltime,ttest_current)
 
-        mod_mean=aov(Response ~ group*Question_no, data=ttest_combo) 
+        mod_mean=aov(Response ~ group*Question_no, data=ttest_combo)
         tukey_mod_mean = TukeyHSD(mod_mean, conf.level=0.95)
         tukey_mod_mean
 
@@ -39,7 +39,7 @@ See below for some basic statistic methods I used to detemine significance of qu
 
         ##################
         ##################
-        
+
 
         # Are the responses different from each question across years?
 
@@ -47,10 +47,10 @@ See below for some basic statistic methods I used to detemine significance of qu
         ds %>%
         ggplot()+
         geom_boxplot(aes(x=Question_no,y=Response))+
-        theme_classic() 
+        theme_classic()
 
 
-        #tukey test 
+        #tukey test
         mod=aov(Response~year*Question_no,data=ds)
         tukey_mod = TukeyHSD(mod,conf.level = 0.95)
         tukey_mod
@@ -66,8 +66,9 @@ See below for some basic statistic methods I used to detemine significance of qu
         tukey_results2 = as.data.frame(tukey_mod$Question_no)
         tukey_results2 %>%
         filter(`p adj` < 0.05) #question 3 and 4 are significantly lower than the majority of the others. Q2 is sig diff from only two other questions
-    
+
     {% endhighlight %}
+
 </div>
 
 NOTE: Thank you to [iStock by Getty Images](https://www.istockphoto.com/) for the stock survey image used for this project.

@@ -36,14 +36,14 @@ See below for example code on how I imputed missing data and predicted federal p
         ds_emp_final_imp <- mice(ds_emp_final,m=5,maxit=50,method = "pmm",seed=500)
         ds_emp_final_imp = complete(ds_emp_final_imp,1)
 
-        
+
         ##################
         ##################
 
         # More Cleaning
         ## Find Fed Pov Level
 
-        #read in and clean up poverty data. 
+        #read in and clean up poverty data.
         pov = read_csv("/Users/Haleigh/Documents/NH/Reports/Demo/Fed_Pov_2024.csv") #downloaded from https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines (click on "A Chart with percentages (e.g., 125 percent) of the guidelines (PDF"))
 
         pov = pov %>%
@@ -59,10 +59,10 @@ See below for example code on how I imputed missing data and predicted federal p
         if (is.na(household_size) | is.na(mo_income)) {
             return(NA)
         }
-        
+
         # Get the relevant thresholds for the household size
         thresholds <- pov[pov$household_size == household_size, ]
-        
+
         if (mo_income <= thresholds$`25%`) {
             return("25%")
         } else if (mo_income <= thresholds$`50%`) {
@@ -139,6 +139,7 @@ See below for example code on how I imputed missing data and predicted federal p
                 moe_high = poverty_level+(poverty_level*0.05))
 
     {% endhighlight %}
+
 </div>
 
 NOTE: Thank you to [iStock by Getty Images](https://www.istockphoto.com/) for the stock image used for this project.

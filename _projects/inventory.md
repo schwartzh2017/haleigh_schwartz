@@ -9,9 +9,9 @@ category: Main Street Family Medicine
 related_publications: false
 ---
 
-In my role at [Main Street Family Medicine](https://www.mainstreetfamilymed.com/), I created an application for our nurses to keep better track of our medications stored in-house. The app also features an option to predict which medicaions would be the best to re-order at any given time. This is based on our current inventory, dispense history, and other data concerning our current patient base. The prediction feature saves our nurses time it would otherwise take them to manually determine which medications they need to order. 
+In my role at [Main Street Family Medicine](https://www.mainstreetfamilymed.com/), I created an application for our nurses to keep better track of our medications stored in-house. The app also features an option to predict which medicaions would be the best to re-order at any given time. This is based on our current inventory, dispense history, and other data concerning our current patient base. The prediction feature saves our nurses time it would otherwise take them to manually determine which medications they need to order.
 
-Below includes a few screenshots of the app pages and the code I used to create the prediction model. 
+Below includes a few screenshots of the app pages and the code I used to create the prediction model.
 
 When a user navigates to the web application, they are first prompted to enter the password (as seen below):
 
@@ -37,7 +37,8 @@ Finally, the last page (titled "Prediction Page") lists the medications my model
   </div>
 </div>
 
-The below code showcases my model for determining which meds we need to order and a summary of this process. This model was made in Python and the app in R (app code not shown).  
+The below code showcases my model for determining which meds we need to order and a summary of this process. This model was made in Python and the app in R (app code not shown).
+
 1. Preprocess data (OneHotEncoder and StandardScaler for categorical and numeric data, respectively)
 2. Test/train split
 3. Create an ensemble made of various regression models and determine which had the lowest negative mean squared error
@@ -95,10 +96,10 @@ The below code showcases my model for determining which meds we need to order an
 
     #find accuracies using cross validated scores
     for clf, label in zip([clf1, clf2, clf3, clf4, eclf], ['Random Forest', 'Gradient Boost', 'Bagging', 'SGD', 'Ensemble']):
-        scores = cross_val_score(clf, X_train_trans, y_train, scoring='neg_mean_squared_error', cv=5) 
+        scores = cross_val_score(clf, X_train_trans, y_train, scoring='neg_mean_squared_error', cv=5)
         print("MSE: %0.2f (+/- %0.2f) [%s]" % (scores.mean(), scores.std(), label)) #gradient boost was the best
 
-    ##################### 
+    #####################
 
     # 4. Hyperparameterize
 
@@ -146,7 +147,7 @@ The below code showcases my model for determining which meds we need to order an
 
     #####################
 
-    # 6. Test 
+    # 6. Test
 
     #set up pipeline with above parameters
     pipeline_test = Pipeline([('transformer', transformer),
@@ -195,6 +196,7 @@ The below code showcases my model for determining which meds we need to order an
     pred_names.to_csv("./prediction_names.csv")
 
     {% endhighlight %}
+
 </div>
 
 NOTE: Thank you to the [University of California](https://www.universityofcalifornia.edu/sites/default/files/generic-drugs-istock.jpg) for the stock medication image used for this project.
